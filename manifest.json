@@ -15,8 +15,8 @@
     "48": "caption48.png",
     "128": "caption128.png"
   },
-  "minimum_chrome_version": "25",
-  "permissions": ["activeTab"],
+  "minimum_chrome_version": "33",
+  "permissions": ["activeTab", "storage"],
   "content_scripts": [
     {
       "js": ["content.js"],
