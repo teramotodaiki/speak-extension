@@ -98,13 +98,13 @@ const stopTracking = () => {
 init();
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.data === 'start') {
+  if (request.method === 'start') {
     isStopButtonClicked = false;
     startTracking();
-  } else if (request.data === 'stop') {
+  } else if (request.method === 'stop') {
     isStopButtonClicked = true;
     stopTracking();
-  } else {
+  } else if (request.method === 'lang') {
     languageSelected = request.data;
     recognition.lang = languageSelected;
   }

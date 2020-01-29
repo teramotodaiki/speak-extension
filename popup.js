@@ -5,15 +5,17 @@ const errorMessage = document.getElementsByClassName('error-message')[0];
 
 languageSelect.addEventListener('change', function(event) {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { data: event.target.value }, function(
-      response
-    ) {});
+    chrome.tabs.sendMessage(
+      tabs[0].id,
+      { method: 'lang', data: event.target.value },
+      function(response) {}
+    );
   });
 });
 
 startButton.addEventListener('click', function() {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { data: 'start' }, function(
+    chrome.tabs.sendMessage(tabs[0].id, { method: 'start' }, function(
       response
     ) {});
   });
@@ -21,7 +23,7 @@ startButton.addEventListener('click', function() {
 
 stopButton.addEventListener('click', function() {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { data: 'stop' }, function(
+    chrome.tabs.sendMessage(tabs[0].id, { method: 'stop' }, function(
       response
     ) {});
   });
