@@ -47,6 +47,8 @@ const init = () => {
   recognition.onspeechstart = event => console.log('speech started');
   recognition.onspeechend = event => stopTracking();
   recognition.onend = function(event) {
+    // SpeechRecognition stopped then try to restart if needed.
+    started = false;
     if (isStopButtonClicked) {
       stopTracking();
     } else {
@@ -54,8 +56,6 @@ const init = () => {
     }
   };
 };
-
-const startTracking = () => recognition.start();
 
 const setDivStyle = div => {
   div.style.bottom = '10px';
@@ -72,6 +72,20 @@ const setDivStyle = div => {
   div.style.borderRadius = '5px';
   div.style.zIndex = '10000';
   div.style.fontFamily = 'Arial';
+};
+
+/**
+ * A flag represents SpeechRecognition continues to work.
+ */
+let started = false;
+
+const startTracking = () => {
+  // Shouldn't call start() while recognizing.
+  if (started) {
+    return;
+  }
+  started = true;
+  recognition.start();
 };
 
 const stopTracking = () => {
