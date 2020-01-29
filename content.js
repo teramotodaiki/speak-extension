@@ -106,5 +106,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     stopTracking();
   } else {
     languageSelected = request.data;
+    recognition.lang = languageSelected;
   }
 });
